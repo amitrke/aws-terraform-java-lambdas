@@ -12,15 +12,28 @@ public class CalcTest {
     private final CalcHandler handler = new CalcHandler();
 
     @Test
-    void testHandleRequest() {
+    void testAddRequest() {
         APIGatewayProxyRequestEvent request = new APIGatewayProxyRequestEvent();
-        request.setBody("John");
+        request.setBody("{\"a\": 1, \"b\": 2, \"oper\": \"add\"}");
 
         Context context = new TestContext();
 
         APIGatewayProxyResponseEvent response = handler.handleRequest(request, context);
 
         assertEquals(200, response.getStatusCode());
-        assertEquals("Hello, John!", response.getBody());
+        assertEquals("{\"result\": 3.0}", response.getBody());
+    }
+
+    @Test
+    void testInvalidOperRequest() {
+        APIGatewayProxyRequestEvent request = new APIGatewayProxyRequestEvent();
+        request.setBody("{\"a\": 1, \"b\": 2, \"oper\": \"invalid\"}");
+
+        Context context = new TestContext();
+
+        APIGatewayProxyResponseEvent response = handler.handleRequest(request, context);
+
+        assertEquals(422, response.getStatusCode());
+        assertEquals("{\"Error\": \"Invalid operation\"}", response.getBody());
     }
 }
