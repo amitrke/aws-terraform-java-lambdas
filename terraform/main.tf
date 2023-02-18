@@ -24,14 +24,8 @@ resource "aws_iam_role_policy_attachment" "lambda_execution_role_policy_attachme
   role       = aws_iam_role.lambda_execution_role.name
 }
 
-data "archive_file" "lambda_deployment_package" {
-  type        = "zip"
-  source_dir = "../lambda-functions/target/"
-  output_path = "code.zip"
-}
-
 resource "aws_lambda_function" "calc_lambda_handler" {
-  filename      = data.archive_file.lambda_deployment_package.output_path
+  filename      = "../lambda-functions/target/lambda-functions-1.0-SNAPSHOT.jar"
   function_name = "CalcHandler"
   role          = aws_iam_role.lambda_execution_role.arn
   handler       = "com.example.CalcHandler::handleRequest"
