@@ -34,6 +34,7 @@ resource "aws_api_gateway_method_response" "my_method_response" {
 resource "aws_api_gateway_deployment" "my_api_deployment" {
   rest_api_id = aws_api_gateway_rest_api.my_api.id
   stage_name  = "prod"
+  depends_on = [aws_api_gateway_method_response.my_method_response]
 }
 
 resource "aws_lambda_permission" "my_lambda_permission" {
