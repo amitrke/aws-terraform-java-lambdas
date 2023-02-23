@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 public class CalcHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent>{
 
     public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent event, Context context) {
+        System.out.println("Received event: " + event);
         Gson g = new Gson();
         APIGatewayProxyResponseEvent response = new APIGatewayProxyResponseEvent();
         CalcOper calcOper;
@@ -16,6 +17,11 @@ public class CalcHandler implements RequestHandler<APIGatewayProxyRequestEvent, 
             String body = event.getBody();
             calcOper = g.fromJson(body, CalcOper.class);
             System.out.println(calcOper);
+            if (calcOper == null) {
+                response.setStatusCode(422);
+                response.setBody("{\"Error\": \"Invalid input\"}");
+                return response;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             response.setStatusCode(422);

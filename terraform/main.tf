@@ -31,3 +31,11 @@ resource "aws_lambda_function" "calc_lambda_handler" {
   handler       = "com.example.CalcHandler::handleRequest"
   runtime       = "java11"
 }
+
+resource "aws_lambda_function" "greet_lambda_handler" {
+  filename      = "../lambda-functions/target/lambda-functions-1.0-SNAPSHOT.jar"
+  function_name = "GreetHandler"
+  role          = aws_iam_role.lambda_execution_role.arn
+  handler       = "com.example.GreetHandler::handleRequest"
+  runtime       = "java11"
+}

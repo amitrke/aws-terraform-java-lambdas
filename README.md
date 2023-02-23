@@ -12,3 +12,21 @@ mvn archetype:generate \
 -DarchetypeArtifactId=maven-archetype-quickstart \
 -DinteractiveMode=false
 ```
+
+## Sample requests
+
+```
+curl --location --request POST 'https://xxxxxx.execute-api.us-east-1.amazonaws.com/prod/calc' \
+--header 'Content-Type: text/plain' \
+--data-raw 'Amit'
+```
+
+```
+curl --location --request POST 'https://xxxxxx.execute-api.us-east-1.amazonaws.com/prod/calc' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "a": 1,
+    "b": 2,
+    "oper": "add"
+}'
+```

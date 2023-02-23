@@ -36,4 +36,13 @@ public class CalcTest {
         assertEquals(422, response.getStatusCode());
         assertEquals("{\"Error\": \"Invalid operation\"}", response.getBody());
     }
+
+    @Test
+    void testInvalidOperRequest2() {
+        APIGatewayProxyRequestEvent request = new APIGatewayProxyRequestEvent();
+        Context context = new TestContext();
+        APIGatewayProxyResponseEvent response = handler.handleRequest(request, context);
+        assertEquals(422, response.getStatusCode());
+        assertEquals("{\"Error\": \"Invalid input\"}", response.getBody());
+    }
 }
