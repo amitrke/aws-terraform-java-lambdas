@@ -29,7 +29,7 @@ resource "aws_lambda_function" "calc_lambda_handler" {
   function_name = "CalcHandler"
   role          = aws_iam_role.lambda_execution_role.arn
   handler       = "com.example.CalcHandler::handleRequest"
-  runtime       = "java11"
+  runtime       = "java21"
 }
 
 resource "aws_lambda_function" "greet_lambda_handler" {
@@ -37,5 +37,5 @@ resource "aws_lambda_function" "greet_lambda_handler" {
   function_name = "GreetHandler"
   role          = aws_iam_role.lambda_execution_role.arn
   handler       = "com.example.GreetHandler::handleRequest"
-  runtime       = "java11"
+  runtime       = "java21"
 }
